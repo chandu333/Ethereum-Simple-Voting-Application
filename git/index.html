@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/web3/dist/web3.min.js" ></script>
+</head>
+<!DOCTYPE html>
+<head>
+<html>
+        <style>
+                table, td, th {    
+                    border: 1px solid #ddd;
+                    text-align: left;
+                }
+                
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                }
+                
+                th, td {
+                    padding: 15px;
+                }
+                </style>
+                </head>
+<body>
+
+<h2 align="center" style="color:blue;">Ethereum Voting System</h2></body>
+
+<table style="width:100%">
+  <tr>
+    <th>Name</th>
+    <th>Vote</th> 
+    <th>count</th>
+  </tr>
+  <tr>
+    <td>Chandu</td>
+    <td ><button id ="button1"></button></td>
+    <td id ="output1">
+        <pre id =output1></pre>
+    </td>
+  </tr>
+  <tr>
+    <td>Anwin</td>
+    <td><button id="button2"></button></td>
+    <td id="output2"></td>
+  </tr>
+  <tr>
+    <td>shijin</td>
+    <td><button id="button3"></button></td>
+    <td id="output3"> </td>
+  </tr>
+</table>
+
+
+<script>
+  
+        // set the provider you want from Web3.providers
+        var Web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        
+        Web3.eth.defaultAccount   = Web3.eth.accounts[0];   
+      
+        var testContract = Web3.eth.contract([
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "vote1",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "vote3",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getInstructor3",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getInstructor1",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "vote2",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "name3",
+		"outputs": [
+			{
+				"name": "",
+				"type": "string"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getInstructor2",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+]);
+      
+      var test = testContract.at('0xf03011b80aae40d3c1cb8925fe84336d3f285922');
+
+      var button1 = document.getElementById("button1");
+      var button2 = document.getElementById("button2");
+      var button3 = document.getElementById("button3");
+      
+      
+      
+      var output = document.getElementById("output1");
+      output.innerHTML = test.getInstructor1(); 
+      var output2 = document.getElementById("output2");
+      output2.innerHTML = test.getInstructor2(); 
+      var output3 = document.getElementById("output3");
+      output3.innerHTML = test.getInstructor3(); 
+     
+       
+      button1.addEventListener("click",function(){
+
+          test.vote1();
+          
+          
+          location.reload(); 
+      });
+
+
+     button2.addEventListener("click",function(){
+
+test.vote2();
+
+location.reload(); 
+});
+   
+button3.addEventListener("click",function(){
+
+test.vote3();
+
+location.reload(); 
+}); 
+
+    </script>
+</body>
+</html>
